@@ -1,7 +1,7 @@
 use std::fs;
 use tonic::{transport::Server, Request, Response, Status};
 use log::{debug, info};
-use yaml_rust::{YamlLoader};
+use yaml_rust::YamlLoader;
 
 use commands::commander_server::{Commander, CommanderServer};
 use commands::{CommandRequest, CommandResponse};
@@ -37,13 +37,13 @@ impl Commander for BridgeCommander {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config_contents = fs::read_to_string("./config.yaml").expect("Cannot read config.yaml");
-    let configs = YamlLoader::load_from_str(&config_contents).unwrap();
+    let configs = YamlLoader::load_from_str(&config_contents)?;
     let config = &configs[0];
     
     let server_port = config["server"]["port"].as_i64().unwrap();
 
     let server_address: std::string::String = format!("[::1]:{port}", port=server_port).into();
-    let addr = server_address.parse().unwrap();
+    let addr = server_address.parse()?;
     let commander = BridgeCommander::default();
 
     info!("Server listening on {}", addr);
