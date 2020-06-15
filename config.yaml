@@ -1,0 +1,13 @@
+server:
+  port: 50051
+
+protocols:
+  UART:
+    hwid: 0000
+    port: COM5
+
+devices:
+  LG TV:
+    profile_file_regex: ""
+  LG Soundbar:
+    profile_file_regex: ""

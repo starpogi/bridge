@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package commands;
+
+service Commander {
+    rpc Send (CommandRequest) returns (CommandResponse);
+}
+
+enum CommandType {
+    VOLUME_SET = 0;
+    VOLUME_UP = 1;
+    VOLUME_DOWN = 2;
+    MUTE = 3;
+    UNMUTE = 4;
+    POWER_ON = 5;
+    POWER_OFF = 6;
+    TV_SOURCE_SET = 7;
+    AUDIO_SOURCE_SET = 8;
+}
+
+message CommandRequest {
+    string client_id = 1;
+    CommandType command = 2;
+    repeated string args = 3;
+}
+
+message CommandResponse {
+    string client_id = 1;
+    CommandType command = 2;
+    repeated string args = 3;
+    string message = 5;
+}

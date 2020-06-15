@@ -1,2 +1,2 @@
 # bridge
-IR Home Automation Bridge
+Infrared Controller Server that handles state tracking 
